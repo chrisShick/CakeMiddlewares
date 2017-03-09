@@ -11,7 +11,6 @@ class FirewallMiddleware
 {
     use InstanceConfigTrait;
 
-
     /**
      * Default Configuration for the Firewall Middleware
      *
@@ -20,7 +19,8 @@ class FirewallMiddleware
     protected $_defaultConfig = [
         'message' => 'You are not authorized to perform this action.',
         'whitelist' => [],
-        'blacklist' => []
+        'blacklist' => [],
+        'defaultState' => false
     ];
 
     /**
@@ -29,7 +29,6 @@ class FirewallMiddleware
      * @var string
      */
     protected $_identifier;
-
 
     /**
      * FirewallMiddleware constructor.
@@ -54,8 +53,8 @@ class FirewallMiddleware
      */
     public function setWhiteList($whitelist)
     {
-        if(!empty($whitelist)){
-            if(!is_array($whitelist) && is_string($whitelist)) {
+        if (!empty($whitelist)){
+            if (!is_array($whitelist) && is_string($whitelist)) {
                 $whitelist = [$whitelist];
             }
             $this->setConfig('whitelist', $whitelist);
@@ -71,8 +70,8 @@ class FirewallMiddleware
      */
     public function setBlacklist($blacklist)
     {
-        if(!empty($blacklist)){
-            if(!is_array($blacklist) && is_string($blacklist)) {
+        if (!empty($blacklist)){
+            if (!is_array($blacklist) && is_string($blacklist)) {
                 $blacklist = [$blacklist];
             }
             $this->setConfig('blacklist', $blacklist);
@@ -83,7 +82,7 @@ class FirewallMiddleware
     /**
      *
      *
-     * @param /Psr/Http/Message/ServerRequestInterface $request Request object
+     * @param /Psr/Http/Message/ServerRequestInterface $request ServerRequest object
      * @param /Psr/Http/Message/ResponseInterface $response Response object
      * @param callable $next next middleware call
      * @return /Psr/Http/Message/ResponseInterface
@@ -95,6 +94,8 @@ class FirewallMiddleware
         $whitelist = $this->getConfig('whitelist');
         $blacklist = $this->getConfig('blacklist');
 
+        $this->_setIdentifier($request);
+
         if (!empty($whitelist)) {
             $firewall->addList($whitelist, 'whitelist', true);
         }
@@ -103,7 +104,9 @@ class FirewallMiddleware
             $firewall->addList($blacklist, 'blacklist', false);
         }
 
-        $result = $firewall->setIpAddress($this->_identifier)
+
+        $result = $firewall->setDefaultState($this->getConfig('defaultState'))
+            ->setIpAddress($this->_identifier)
             ->handle();
 
         if (!$result) {

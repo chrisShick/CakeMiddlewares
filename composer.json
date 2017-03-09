@@ -23,7 +23,8 @@
   },
   "require": {
     "cakephp/cakephp": "~3.4",
-    "m6web/firewall": "~1.0"
+    "m6web/firewall": "~1.0",
+    "piwik/referrer-spam-blacklist": "^1.0"
   },
   "require-dev": {
     "cakephp/cakephp-codesniffer": "^2.1",
