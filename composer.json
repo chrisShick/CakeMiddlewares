@@ -22,7 +22,8 @@
     "source": "https://github.com/chrisShick/CakeMiddlewares"
   },
   "require": {
-    "cakephp/cakephp": "~3.4"
+    "cakephp/cakephp": "~3.4",
+    "m6web/firewall": "~1.0"
   },
   "require-dev": {
     "cakephp/cakephp-codesniffer": "^2.1",
