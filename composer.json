@@ -1,0 +1,42 @@
+{
+
+  "name": "chrisShick/CakeMiddlewares",
+  "description": "A collection of CakePHP Middlewares.",
+  "type": "cakephp-plugin",
+  "keywords": [
+    "chrisShick",
+    "cakephp",
+    "middleware"
+  ],
+  "homepage": "https://github.com/chrisShick/CakeMiddlewares",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Chris Hickingbottom",
+      "homepage": "http://github.com/chrisShick",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/chrisShick/CakeMiddlewares/issues",
+    "source": "https://github.com/chrisShick/CakeMiddlewares"
+  },
+  "require": {
+    "cakephp/cakephp": "~3.4"
+  },
+  "require-dev": {
+    "cakephp/cakephp-codesniffer": "^2.1",
+    "phpunit/phpunit": "<6.0"
+
+  },
+  "autoload": {
+    "psr-4": {
+      "chrisShick\\CakeMiddlewares\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "chrisShick\\CakeMiddlewares\\Test\\": "tests"
+    }
+  }
+}
