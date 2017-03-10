@@ -2,9 +2,9 @@
 namespace chrisShick\CakeMiddlewares\Middleware;
 
 use chrisShick\CakeMiddlewares\Utilities\IdentifierTrait;
+use Geocoder\Geocoder;
 use Geocoder\ProviderAggregator;
 use Geocoder\Provider\FreeGeoIp;
-use Geocoder\Geocoder;
 use Ivory\HttpAdapter\FopenHttpAdapter;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

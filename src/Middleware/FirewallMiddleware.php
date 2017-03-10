@@ -79,7 +79,6 @@ class FirewallMiddleware
      */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
     {
-
         $firewall = new Firewall();
         $whitelist = $this->getConfig('whitelist');
         $blacklist = $this->getConfig('blacklist');
@@ -93,7 +92,7 @@ class FirewallMiddleware
         if (!empty($blacklist)) {
             $firewall->addList($blacklist, 'blacklist', false);
         }
-        
+
         $result = $firewall->setDefaultState($this->getConfig('defaultState'))
             ->setIpAddress($this->_identifier)
             ->handle();
