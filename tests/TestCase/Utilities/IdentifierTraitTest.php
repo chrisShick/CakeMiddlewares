@@ -63,7 +63,6 @@ class UtilitesTestCase extends TestCase
      */
     public function testSetIdentifier()
     {
-
         $config = [
             'identifier' => function (ServerRequestInterface $request) {
                 return $request->clientIp();
