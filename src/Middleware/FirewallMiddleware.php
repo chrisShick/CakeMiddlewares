@@ -1,7 +1,7 @@
 <?php
 namespace chrisShick\CakeMiddlewares\Middleware;
 
-use Cake\Core\InstanceConfigTrait;
+use chrisShick\CakeMiddlewares\Utilities\IdentifierTrait;
 use M6Web\Component\Firewall\Firewall;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -9,7 +9,7 @@ use Zend\Diactoros\Stream;
 
 class FirewallMiddleware
 {
-    use InstanceConfigTrait;
+    use IdentifierTrait;
 
     /**
      * Default Configuration for the Firewall Middleware
@@ -24,25 +24,13 @@ class FirewallMiddleware
     ];
 
     /**
-     * Unique client identifier
-     *
-     * @var string
-     */
-    protected $_identifier;
-
-    /**
      * FirewallMiddleware constructor.
      *
      * @param array $config customized configuration options for Firewall Middleware
      */
     public function __construct(array $config = [])
     {
-        $config += [
-            'identifier' => function (ServerRequestInterface $request) {
-                return $request->clientIp();
-            }
-        ];
-        $this->setConfig($config);
+        $this->setConfig($this->_setIdentifierConfig($config));
     }
 
     /**
@@ -118,22 +106,5 @@ class FirewallMiddleware
         }
 
         return $next($request, $response);
-    }
-
-    /**
-     * Sets the identifier class property. Uses Firewall default IP address
-     * based identifier unless a callable alternative is passed.
-     *
-     * @param \Psr\Http\Message\ServerRequestInterface $request Request object
-     * @return void
-     * @throws \InvalidArgumentException
-     */
-    protected function _setIdentifier(ServerRequestInterface $request)
-    {
-        $key = $this->getConfig('identifier');
-        if (!is_callable($this->getConfig('identifier'))) {
-            throw new \InvalidArgumentException('Firewall identifier option must be a callable');
-        }
-        $this->_identifier = $key($request);
     }
 }

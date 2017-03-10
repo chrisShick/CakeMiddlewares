@@ -2,6 +2,7 @@
 namespace chrisShick\CakeMiddlewares\Middleware;
 
 use Cake\Core\InstanceConfigTrait;
+use Cake\Core\Plugin;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Stream;
@@ -18,7 +19,7 @@ class SpamBlockerMiddleware
     protected $_defaultConfig = [
         'message' => "We do not allow spam. Get out of here!",
         'spammers' => [],
-        'spammersFile' => ROOT.DS.'vendor/piwik/referrer-spam-blacklist/spammers.txt'
+        'spammersFile' => '/piwik/referrer-spam-blacklist/spammers.txt'
     ];
 
     /**
@@ -28,6 +29,8 @@ class SpamBlockerMiddleware
      */
     public function __construct(array $config = [])
     {
+        $this->_defaultConfig['spammersFile'] = dirname(dirname(CAKE_CORE_INCLUDE_PATH)).$this->_defaultConfig['spammersFile'];
+
         $this->setConfig($config);
 
         $spammerFile = $this->getConfig('spammersFile');
@@ -35,14 +38,14 @@ class SpamBlockerMiddleware
             throw new \RuntimeException(sprintf('The spammers file "%s" doest not exists', $spammerFile));
         }
 
-        $spammers = array_merge($this->getConfig('spammers'), file($spammerFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
-        $this->setConfig('spammers', $spammers);
+        $spammersList = file($spammerFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        $this->setConfig('spammers', $spammersList);
     }
 
     /**
      *
      *
-     * @param ServerRequestInterface $request $request ServerRequest object
+     * @param /Psr/Http/Message/ServerRequestInterface $request $request ServerRequest object
      * @param /Psr/Http/Message/ResponseInterface $response Response object
      * @param callable $next next middleware call
      * @return /Psr/Http/Message/ResponseInterface

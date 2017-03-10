@@ -18,7 +18,7 @@ class DelayMiddleware
     protected $_defaultConfig = [
         'header' => 'X-Delay-Time',
         'attribute' => 'delayTime',
-        'seconds' => [1,2]
+        'seconds' => [1, 2]
     ];
 
     /**
@@ -26,7 +26,7 @@ class DelayMiddleware
      *
      * @param array $config customized configuration options for SpamBlocker Middleware
      */
-    public function __construct(array $config)
+    public function __construct(array $config = [])
     {
         $this->setConfig($config);
     }
@@ -35,7 +35,7 @@ class DelayMiddleware
     /**
      *
      *
-     * @param ServerRequestInterface $request $request ServerRequest object
+     * @param /Psr/Http/Message/ServerRequestInterface $request $request ServerRequest object
      * @param /Psr/Http/Message/ResponseInterface $response Response object
      * @param callable $next next middleware call
      * @return /Psr/Http/Message/ResponseInterface
@@ -54,15 +54,16 @@ class DelayMiddleware
 
         $attribute = $this->getConfig('attribute');
         $header = $this->getConfig('header');
+        $seconds = round($ms / 1000000);
 
         if (is_string($attribute)) {
-            $request = $request->withAttribute($this->getConfig('attribute'), round($ms / 1000000));
+            $request = $request->withAttribute($attribute, $seconds);
         }
 
         $response = $next($request, $response);
 
         if (is_string($header)) {
-            $response = $response->withHeader($this->getConfig('header'));
+            $response = $response->withHeader($header, (string)$seconds);
         }
 
         return $response;
