@@ -17,11 +17,9 @@ class UtilitesTestCase extends TestCase
 
     public function testSetIdentifier()
     {
-
     }
 
     public function testSetIdentifierConfig()
     {
-
     }
 }

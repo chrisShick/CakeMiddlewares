@@ -33,9 +33,8 @@ class FirewallMiddleware
         $config = $this->_setIdentifierConfig($config);
 
         $listConfigChecks = ['whitelist', 'blacklist'];
-        foreach($listConfigChecks as $check) {
-            if(isset($config[$check]) && is_string($config[$check]))
-            {
+        foreach ($listConfigChecks as $check) {
+            if (isset($config[$check]) && is_string($config[$check])) {
                 $config[$check] = [$config[$check]];
             }
         }

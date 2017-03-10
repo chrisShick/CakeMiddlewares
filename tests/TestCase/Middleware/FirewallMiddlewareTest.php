@@ -33,7 +33,7 @@ class FirewallMiddlewareTest extends TestCase
             'whitelist' => [],
             'blacklist' => [],
             'defaultState' => false,
-            'identifier' => function(ServerRequestInterface $request) {
+            'identifier' => function (ServerRequestInterface $request) {
                 $request->clientIp();
             }
         ];
@@ -49,7 +49,7 @@ class FirewallMiddlewareTest extends TestCase
                 '127.0.0.1'
             ],
             'defaultState' => false,
-            'identifier' => function(ServerRequestInterface $request) {
+            'identifier' => function (ServerRequestInterface $request) {
                 $request->clientIp();
             }
         ];
@@ -58,7 +58,6 @@ class FirewallMiddlewareTest extends TestCase
         $result = $middleware->getConfig();
 
         $this->assertEquals($expected, $result);
-
     }
 
     /**
