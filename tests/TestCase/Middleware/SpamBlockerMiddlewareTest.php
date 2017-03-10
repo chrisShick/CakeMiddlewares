@@ -5,6 +5,7 @@ use Cake\Http\Response;
 use Cake\Http\ServerRequest;
 use Cake\TestSuite\TestCase;
 use chrisShick\CakeMiddlewares\Middleware\SpamBlockerMiddleware;
+use SebastianBergmann\CodeCoverage\RuntimeException;
 
 class SpamBlockerMiddlewareTest extends TestCase
 {
@@ -29,6 +30,13 @@ class SpamBlockerMiddlewareTest extends TestCase
         $result = $middleware->getConfig();
 
         $this->assertEquals($expected, $result);
+
+        $this->expectException(\RuntimeException::class);
+        
+        $middleware = new SpamBlockerMiddleware([
+            'spammerFile' => 'does-not-exist.txt'
+        ]);
+
     }
 
     /**
