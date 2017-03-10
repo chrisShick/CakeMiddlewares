@@ -70,7 +70,7 @@ class UtilitesTestCase extends TestCase
 
         $expected = '192.168.211.12';
         $this->callProtectedMethod('_setIdentifier', [$request], $this->testObject);
-        $actual = $this->getProtectedProperty('identifier', $this->testObject);
+        $actual = $this->getProtectedProperty('_identifier', $this->testObject);
 
         $this->assertEquals($expected, $actual);
     }
