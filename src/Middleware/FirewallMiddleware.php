@@ -30,7 +30,17 @@ class FirewallMiddleware
      */
     public function __construct(array $config = [])
     {
-        $this->setConfig($this->_setIdentifierConfig($config));
+        $config = $this->_setIdentifierConfig($config);
+
+        $listConfigChecks = ['whitelist', 'blacklist'];
+        foreach($listConfigChecks as $check) {
+            if(isset($config[$check]) && is_string($config[$check]))
+            {
+                $config[$check] = [$config[$check]];
+            }
+        }
+
+        $this->setConfig($config);
     }
 
     /**
@@ -39,10 +49,10 @@ class FirewallMiddleware
      * @param string|array $whitelist array of allowed ips
      * @return $this
      */
-    public function setWhiteList($whitelist)
+    public function setWhitelist($whitelist)
     {
         if (!empty($whitelist)) {
-            if (!is_array($whitelist) && is_string($whitelist)) {
+            if (is_string($whitelist)) {
                 $whitelist = [$whitelist];
             }
             $this->setConfig('whitelist', $whitelist);
@@ -60,7 +70,7 @@ class FirewallMiddleware
     public function setBlacklist($blacklist)
     {
         if (!empty($blacklist)) {
-            if (!is_array($blacklist) && is_string($blacklist)) {
+            if (is_string($blacklist)) {
                 $blacklist = [$blacklist];
             }
             $this->setConfig('blacklist', $blacklist);
@@ -80,6 +90,7 @@ class FirewallMiddleware
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
     {
         $firewall = new Firewall();
+        $firewall->setDefaultState((bool)$this->getConfig('defaultState'));
         $whitelist = $this->getConfig('whitelist');
         $blacklist = $this->getConfig('blacklist');
 
@@ -93,8 +104,7 @@ class FirewallMiddleware
             $firewall->addList($blacklist, 'blacklist', false);
         }
 
-        $result = $firewall->setDefaultState($this->getConfig('defaultState'))
-            ->setIpAddress($this->_identifier)
+        $result = $firewall->setIpAddress($this->_identifier)
             ->handle();
 
         if (!$result) {
