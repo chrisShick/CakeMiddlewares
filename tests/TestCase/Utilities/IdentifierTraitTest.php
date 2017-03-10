@@ -7,7 +7,8 @@ use chrisShick\CakeMiddlewares\Utilities\IdentifierTrait;
 use FriendsOfCake\TestUtilities\AccessibilityHelperTrait;
 use Psr\Http\Message\ServerRequestInterface;
 
-class testClass {
+class testClass
+{
     use IdentifierTrait;
 
     protected $_defaultConfig = [];
@@ -62,6 +63,15 @@ class UtilitesTestCase extends TestCase
      */
     public function testSetIdentifier()
     {
+
+        $config = [
+            'identifier' => function (ServerRequestInterface $request) {
+                return $request->clientIp();
+            }
+        ];
+
+        $this->callProtectedMethod('_setIdentifierConfig', [$config], $this->testObject);
+
         $request = new ServerRequest([
             'environment' => [
                 'REMOTE_ADDR' => '192.168.211.12'
@@ -80,9 +90,6 @@ class UtilitesTestCase extends TestCase
      */
     public function testSetIdentifierFailed()
     {
-        $this->testObject = new testClass();
-        $this->setReflectionClassInstance($this->testObject);
-
         $request = new ServerRequest([
             'environment' => [
                 'REMOTE_ADDR' => '192.168.211.12'
