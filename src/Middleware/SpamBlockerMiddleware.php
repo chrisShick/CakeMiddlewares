@@ -2,7 +2,6 @@
 namespace chrisShick\CakeMiddlewares\Middleware;
 
 use Cake\Core\InstanceConfigTrait;
-use Cake\Core\Plugin;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Stream;
@@ -29,7 +28,7 @@ class SpamBlockerMiddleware
      */
     public function __construct(array $config = [])
     {
-        $this->_defaultConfig['spammersFile'] = dirname(dirname(CAKE_CORE_INCLUDE_PATH)).$this->_defaultConfig['spammersFile'];
+        $this->_defaultConfig['spammersFile'] = dirname(dirname(CAKE_CORE_INCLUDE_PATH)) . $this->_defaultConfig['spammersFile'];
 
         $this->setConfig($config);
 

@@ -31,7 +31,6 @@ class DelayMiddleware
         $this->setConfig($config);
     }
 
-
     /**
      *
      *

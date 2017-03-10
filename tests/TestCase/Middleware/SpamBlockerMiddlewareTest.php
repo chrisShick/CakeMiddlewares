@@ -52,7 +52,7 @@ class SpamBlockerMiddlewareTest extends TestCase
      */
     public function testEditedFileConstructor()
     {
-        $spamFile = dirname(__DIR__).'/spamfile.txt';
+        $spamFile = dirname(__DIR__) . '/spamfile.txt';
         $expected = $this->_getExpectedConfig('My message to everyone', ['my.spammers.com'], $spamFile);
 
         $middleware = new SpamBlockerMiddleware([
@@ -116,7 +116,7 @@ class SpamBlockerMiddlewareTest extends TestCase
             $message = 'We do not allow spam. Get out of here!';
         }
         if (empty($spammerFile)) {
-            $spammerFile = dirname(dirname(CAKE_CORE_INCLUDE_PATH)).'/piwik/referrer-spam-blacklist/spammers.txt';
+            $spammerFile = dirname(dirname(CAKE_CORE_INCLUDE_PATH)) . '/piwik/referrer-spam-blacklist/spammers.txt';
         }
 
         $spammersList = file($spammerFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);

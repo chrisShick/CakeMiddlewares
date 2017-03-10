@@ -41,12 +41,13 @@ class FirewallMiddleware
      */
     public function setWhiteList($whitelist)
     {
-        if (!empty($whitelist)){
+        if (!empty($whitelist)) {
             if (!is_array($whitelist) && is_string($whitelist)) {
                 $whitelist = [$whitelist];
             }
             $this->setConfig('whitelist', $whitelist);
         }
+
         return $this;
     }
 
@@ -58,12 +59,13 @@ class FirewallMiddleware
      */
     public function setBlacklist($blacklist)
     {
-        if (!empty($blacklist)){
+        if (!empty($blacklist)) {
             if (!is_array($blacklist) && is_string($blacklist)) {
                 $blacklist = [$blacklist];
             }
             $this->setConfig('blacklist', $blacklist);
         }
+
         return $this;
     }
 
@@ -91,8 +93,7 @@ class FirewallMiddleware
         if (!empty($blacklist)) {
             $firewall->addList($blacklist, 'blacklist', false);
         }
-
-
+        
         $result = $firewall->setDefaultState($this->getConfig('defaultState'))
             ->setIpAddress($this->_identifier)
             ->handle();

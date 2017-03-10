@@ -2,9 +2,9 @@
 namespace chrisShick\CakeMiddlewares\Middleware;
 
 use chrisShick\CakeMiddlewares\Utilities\IdentifierTrait;
-use Geocoder\Geocoder;
-use Geocoder\Provider\FreeGeoIp;
 use Geocoder\ProviderAggregator;
+use Geocoder\Provider\FreeGeoIp;
+use Geocoder\Geocoder;
 use Ivory\HttpAdapter\FopenHttpAdapter;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -64,7 +64,7 @@ class GeolocationMiddleware
     /**
      * Sets the geocoder class property.
      *
-     * @param Geocoder|null $geocoder
+     * @param Geocoder|null $geocoder Geocoder object
      * @return void
      */
     protected function _setGeocoder(Geocoder $geocoder = null)

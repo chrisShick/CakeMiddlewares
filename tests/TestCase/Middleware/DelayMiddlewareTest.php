@@ -46,7 +46,6 @@ class DelayMiddlewareTest extends TestCase
      */
     public function testInvoke()
     {
-
         $middleware = new DelayMiddleware([
             'seconds' => 1
         ]);
