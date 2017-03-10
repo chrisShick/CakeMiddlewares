@@ -27,7 +27,7 @@ trait IdentifierTrait
     {
         $key = $this->getConfig('identifier');
         if (!is_callable($this->getConfig('identifier'))) {
-            throw new \InvalidArgumentException('Firewall identifier option must be a callable');
+            throw new \InvalidArgumentException('identifier option must be a callable');
         }
         $this->_identifier = $key($request);
     }

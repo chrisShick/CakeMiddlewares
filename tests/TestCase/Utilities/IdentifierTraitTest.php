@@ -70,7 +70,9 @@ class UtilitesTestCase extends TestCase
             }
         ];
 
-        $this->callProtectedMethod('_setIdentifierConfig', [$config], $this->testObject);
+        $config = $this->callProtectedMethod('_setIdentifierConfig', [$config], $this->testObject);
+
+        $this->testObject->setConfig($config);
 
         $request = new ServerRequest([
             'environment' => [
