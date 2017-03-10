@@ -33,6 +33,7 @@ class SpamBlockerMiddleware
         $this->setConfig($config);
 
         $spammerFile = $this->getConfig('spammersFile');
+
         if (!is_file($spammerFile)) {
             throw new \RuntimeException(sprintf('The spammers file "%s" doest not exists', $spammerFile));
         }

@@ -32,11 +32,10 @@ class SpamBlockerMiddlewareTest extends TestCase
         $this->assertEquals($expected, $result);
 
         $this->expectException(\RuntimeException::class);
-        
-        $middleware = new SpamBlockerMiddleware([
-            'spammerFile' => 'does-not-exist.txt'
-        ]);
 
+        $middleware = new SpamBlockerMiddleware([
+            'spammersFile' => 'does-not-exist.txt'
+        ]);
     }
 
     /**
