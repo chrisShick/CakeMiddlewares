@@ -52,7 +52,7 @@ class UtilitesTestCase extends TestCase
             }
         ];
 
-        $actual = $this->callProtectedMethod('setIdentifierConfig', $config, $this->testObject);
+        $actual = $this->callProtectedMethod('_setIdentifierConfig', $config, $this->testObject);
 
         $this->assertEquals($expected, $actual);
     }
@@ -69,7 +69,7 @@ class UtilitesTestCase extends TestCase
         ]);
 
         $expected = '192.168.211.12';
-        $this->callProtectedMethod('setIdentifier', $request, $this->testObject);
+        $this->callProtectedMethod('_setIdentifier', $request, $this->testObject);
         $actual = $this->getProtectedProperty('identifier', $this->testObject);
 
         $this->assertEquals($expected, $actual);
@@ -90,6 +90,6 @@ class UtilitesTestCase extends TestCase
         ]);
 
         $this->expectException(\InvalidArgumentException::class);
-        $this->callProtectedMethod('setIdentifier', $request, $this->testObject);
+        $this->callProtectedMethod('_setIdentifier', $request, $this->testObject);
     }
 }
