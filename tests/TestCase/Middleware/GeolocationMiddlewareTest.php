@@ -5,8 +5,8 @@ use Cake\Http\Response;
 use Cake\Http\ServerRequest;
 use Cake\TestSuite\TestCase;
 use chrisShick\CakeMiddlewares\Middleware\GeolocationMiddleware;
-use Geocoder\Provider\FreeGeoIp;
 use Geocoder\ProviderAggregator;
+use Geocoder\Provider\FreeGeoIp;
 use Ivory\HttpAdapter\FopenHttpAdapter;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -64,8 +64,9 @@ class GeolocationMiddlewareTest extends TestCase
         $result = $middleware(
             $request,
             $response,
-            function (ServerRequestInterface $request, ResponseInterface $response) use(&$resultLocation) {
+            function (ServerRequestInterface $request, ResponseInterface $response) use (&$resultLocation) {
                 $resultLocation = $request->getAttribute('geolocation');
+                
                 return $response;
             }
         );
