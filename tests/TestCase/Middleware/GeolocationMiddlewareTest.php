@@ -66,7 +66,7 @@ class GeolocationMiddlewareTest extends TestCase
             $response,
             function (ServerRequestInterface $request, ResponseInterface $response) use (&$resultLocation) {
                 $resultLocation = $request->getAttribute('geolocation');
-                
+
                 return $response;
             }
         );
