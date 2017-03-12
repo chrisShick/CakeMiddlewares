@@ -55,7 +55,7 @@ class GeolocationMiddleware
         if ($this->_identifier !== null && is_string($this->getConfig('attribute'))) {
             $location = $this->geocoder->geocode($this->_identifier);
 
-            $request->withAttribute($this->getConfig('attribute'), $location);
+            $request = $request->withAttribute($this->getConfig('attribute'), $location);
         }
 
         return $next($request, $response);
@@ -73,6 +73,7 @@ class GeolocationMiddleware
             $geocoder = new ProviderAggregator();
             $geocoder->registerProvider(new FreeGeoIp(new FopenHttpAdapter()));
         }
+
         $this->geocoder = $geocoder;
     }
 }
