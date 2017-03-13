@@ -51,6 +51,7 @@ http://github.com/chrisShick/CakeMiddlewares/issues
 
 ## Credits
 This repository was inspired by [Oscarotero's PSR-7 Middelwares](https://github.com/oscarotero/psr7-middlewares)
+
 The requirements and readme was inspired by [UseMuffin's](https://github.com/UseMuffin) repositories. 
 
 ## License
