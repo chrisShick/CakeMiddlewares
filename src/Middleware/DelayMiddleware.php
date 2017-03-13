@@ -4,7 +4,6 @@ namespace chrisShick\CakeMiddlewares\Middleware;
 use Cake\Core\InstanceConfigTrait;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Stream;
 
 class DelayMiddleware
 {

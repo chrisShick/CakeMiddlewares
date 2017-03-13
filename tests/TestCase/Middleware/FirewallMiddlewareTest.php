@@ -109,6 +109,52 @@ class FirewallMiddlewareTest extends TestCase
      */
     public function testInvoke()
     {
+        $middleware = new FirewallMiddleware();
+
+        $response = new Response();
+        $request = new ServerRequest([
+            'environment' => [
+                'REMOTE_ADDR' => '192.168.211.12'
+            ]
+        ]);
+
+        $result = $middleware(
+            $request,
+            $response,
+            function (ServerRequestInterface $request, ResponseInterface $response) {
+                return $response;
+            }
+        );
+
+        $this->assertInstanceOf('Cake\Http\Response', $result);
+        $this->assertEquals(403, $result->getStatusCode());
+
+        $response = new Response();
+        $request = new ServerRequest([
+            'environment' => [
+                'REMOTE_ADDR' => '192.168.214.11'
+            ]
+        ]);
+
+        $middleware->setConfig('defaultState', true);
+
+        $result = $middleware(
+            $request,
+            $response,
+            function (ServerRequestInterface $request, ResponseInterface $response) {
+                return $response;
+            }
+        );
+
+        $this->assertInstanceOf('Cake\Http\Response', $result);
+        $this->assertEquals(200, $result->getStatusCode());
+    }
+
+    /**
+     * Test __invoke with customized Firewall
+     */
+    public function testInvokeCustom()
+    {
         $middleware = new FirewallMiddleware([
             'whitelist' => [
                 '192.168.211.12'
