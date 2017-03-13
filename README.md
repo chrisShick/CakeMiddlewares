@@ -29,11 +29,10 @@ or add the following line to ``config/bootstrap.php``:
 Plugin::load('chrisShick/CakeMiddlewares');
 ```
 ## Available Middlewares
-[DelayMiddleware](http://github.com/chrisShick/CakeMiddlewares/docs/DelayMiddleware.md)
-[FirewallMiddleware](http://github.com/chrisShick/CakeMiddlewares/docs/FirewallMiddleware.md)
-[GeolocationMiddleware](http://github.com/chrisShick/CakeMiddlewares/docs/GeolocationMiddleware.md)
-[SpamBlockerMiddleware](http://github.com/chrisShick/CakeMiddlewares/docs/SpamBlockerMiddleware.md)
-
+- [DelayMiddleware](http://github.com/chrisShick/CakeMiddlewares/docs/DelayMiddleware.md)
+- [FirewallMiddleware](http://github.com/chrisShick/CakeMiddlewares/docs/FirewallMiddleware.md)
+- [GeolocationMiddleware](http://github.com/chrisShick/CakeMiddlewares/docs/GeolocationMiddleware.md)
+- [SpamBlockerMiddleware](http://github.com/chrisShick/CakeMiddlewares/docs/SpamBlockerMiddleware.md)
 
 ## Patches & Features
 
