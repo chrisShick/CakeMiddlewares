@@ -62,7 +62,7 @@ public function middleware($middleware)
     // Various other middlewares for error handling, routing etc. added here.
     
     $spamBlockerMiddleware = new SpamBlockerMiddleware([
-        'spammersFile' => '/path/to/file.txt"
+        'spammersFile' => '/path/to/file.txt'
     ]);
     
     $middlewareQueue->add($spamBlockerMiddleware);
@@ -79,7 +79,7 @@ public function middleware($middleware)
     // Various other middlewares for error handling, routing etc. added here.
     
     $spamBlockerMiddleware = new SpamBlockerMiddleware([
-        'message' => 'Custom 403 message"
+        'message' => 'Custom 403 message'
     ]);
     
     $middlewareQueue->add($spamBlockerMiddleware);
